@@ -3,7 +3,6 @@ import Home from "./pages/Home.jsx"
 import About from "./pages/About.jsx"
 import Vans from "./pages/Vans.jsx"
 
-
 function App() {
 
   return (
