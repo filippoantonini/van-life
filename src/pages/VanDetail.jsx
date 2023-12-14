@@ -30,4 +30,4 @@ export default function VanDetail() {
         </div>
         </div>
     );
-    }
+}
