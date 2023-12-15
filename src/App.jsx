@@ -4,6 +4,7 @@ import About from "./pages/About.jsx"
 import Vans from "./pages/Vans.jsx"
 import VanDetail from "./pages/VanDetail.jsx"
 import Layout from "./components/Layout.jsx"
+import React from "react"
 
 function App() {
 
