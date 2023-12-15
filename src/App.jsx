@@ -1,3 +1,4 @@
+import React from "react"
 import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 import Home from "./pages/Home.jsx"
 import About from "./pages/About.jsx"
@@ -7,7 +8,7 @@ import Dashboard from "./pages/Host/Dashboard.jsx"
 import Income from "./pages/Host/Income.jsx"
 import Reviews from "./pages/Host/Reviews.jsx"
 import Layout from "./components/Layout.jsx"
-import React from "react"
+import HostLayout from "./components/HostLayout.jsx"
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
           <Route path="/About" element={<About />}/>
           <Route path="/Vans" element={<Vans />} />
           <Route path="/Vans/:id" element={<VanDetail />} />
-            <Route path="/host" element={<Dashboard />}>
+            <Route path="/host" element={<HostLayout />}>
               <Route path="/host/income" element={<Income />} />
               <Route path="/host/reviews" element={<Reviews />} />
             </Route>
