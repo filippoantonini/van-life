@@ -1,5 +1,5 @@
 import React from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 const vanElements = [ {id: "1", name: "Modest Explorer", price: 60, description: "The Modest Explorer is a van designed to get you out of the house and into nature. This beauty is equipped with solar panels, a composting toilet, a water tank and kitchenette. The idea is that you can pack up your home and escape for a weekend or even longer!", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png", type: "simple" },
 { id: "2", name: "Beach Bum", price: 80, description: "Beach Bum is a van inspired by surfers and travelers. It was created to be a portable home away from home, but with some cool features in it you won't find in an ordinary camper.", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png", type: "rugged" },
@@ -18,18 +18,28 @@ export default function HostVanDetail() {
     }
 
     return (
-        <div className="van-detail-container">
-        <div className="van-detail">
-            <img src={van.imageUrl} alt={van.name} />
-            <i className={`van-type ${van.type} selected`}>{van.type}</i>
-            <h2>{van.name}</h2>
-            <p className="van-price">
-            <span>${van.price}</span>/day
-            </p>
-            <p>{van.description}</p>
-        </div>
-        </div>
+        <section>
+            <Link
+                to=".."
+                relative="path"
+                className="back-button"
+            >&larr; <span>Back to all vans</span></Link>
+
+            <div className="host-van-detail-layout-container">
+                <div className="host-van-detail">
+                    <img src={van.imageUrl} />
+                    <div className="host-van-detail-info-text">
+                        <i
+                            className={`van-type van-type-${van.type}`}
+                        >
+                            {van.type}
+                        </i>
+                        <h3>{van.name}</h3>
+                        <h4>${van.price}/day</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 
-    // return <h1>Host Van Detail Page</h1>
 }
