@@ -1,8 +1,11 @@
-import React from "react"
-import { Link } from "react-router-dom"
-
+import React, { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function Vans() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [vans, setVans] = useState([]);
+
+  const typeFilter = searchParams.get("type");
 
   const vanElements = [ {id: "1", name: "Modest Explorer", price: 60, description: "The Modest Explorer is a van designed to get you out of the house and into nature. This beauty is equipped with solar panels, a composting toilet, a water tank and kitchenette. The idea is that you can pack up your home and escape for a weekend or even longer!", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png", type: "simple" },
     { id: "2", name: "Beach Bum", price: 80, description: "Beach Bum is a van inspired by surfers and travelers. It was created to be a portable home away from home, but with some cool features in it you won't find in an ordinary camper.", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png", type: "rugged" },
@@ -12,27 +15,51 @@ export default function Vans() {
     { id: "6", name: "Green Wonder", price: 70, description: "With this van, you can take your travel life to the next level. The Green Wonder is a sustainable vehicle that's perfect for people who are looking for a stylish, eco-friendly mode of transport that can go anywhere.", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/green-wonder.png", type: "rugged" }
 ]
 
-    const displayEl = () => {
-      return vanElements.map((van) => (
-        <div key={van.id} className="van-tile">
-          <Link to={`/Vans/${van.id}`}>
-            <img src={van.imageUrl} alt={van.name} />
-            <div className="van-info">
-              <h3>{van.name}</h3>
-              <p>${van.price}<span>/day</span></p>
-            </div>
-            <i className={`van-type ${van.type} selected`}>{van.type}</i>
-          </Link>
-        </div>
-      ));
-    };
-  
-    return (
-      <div className="van-list-container">
-        <h1>Explore our van options</h1>
-        <div className="van-list">{displayEl()}</div>
-      </div>
-    );
-  }
+  // Update displayed vans when the typeFilter changes
+  useEffect(() => {
+    const filteredVans = typeFilter
+      ? vanElements.filter((van) => van.type === typeFilter)
+      : vanElements;
+    setVans(filteredVans);
+  }, [typeFilter, vanElements]);
 
- 
+  const displayEl = () => {
+    return vans.map((van) => (
+      <div key={van.id} className="van-tile">
+        <Link to={`/Vans/${van.id}`}>
+          <img src={van.imageUrl} alt={van.name} />
+          <div className="van-info">
+            <h3>{van.name}</h3>
+            <p>${van.price}<span>/day</span></p>
+          </div>
+          <i className={`van-type ${van.type} selected`}>{van.type}</i>
+        </Link>
+      </div>
+    ));
+  };
+
+  const clearFilters = () => {
+    setSearchParams({});
+  };
+
+  return (
+    <div className="van-list-container">
+      <h1>Explore our van options</h1>
+      <div className="van-list-filter-buttons">
+        <Link to="?type=simple" className="van-type simple">
+          Simple
+        </Link>
+        <Link to="?type=luxury" className="van-type luxury">
+          Luxury
+        </Link>
+        <Link to="?type=rugged" className="van-type rugged">
+          Rugged
+        </Link>
+        <Link to="." className="van-type clear-filters" onClick={clearFilters}>
+          Clear filter
+        </Link>
+      </div>
+      <div className="van-list">{displayEl()}</div>
+    </div>
+  );
+}
