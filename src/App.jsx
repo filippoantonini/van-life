@@ -1,6 +1,7 @@
 import React from "react"
 import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 import Home from "./pages/Home.jsx"
+import NotFound from "./pages/NotFound.jsx"
 import About from "./pages/About.jsx"
 import Vans from "./pages/Vans/Vans.jsx"
 import VanDetail from "./pages/Vans/VanDetail.jsx"
@@ -37,7 +38,7 @@ function App() {
                 <Route path="photos" element={<HostVanPhotos />} />
               </Route>
             </Route>
-
+            <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
