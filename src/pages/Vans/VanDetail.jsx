@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useLocation } from "react-router-dom"
 import React from "react"
 
 const vanElements = [ {id: "1", name: "Modest Explorer", price: 60, description: "The Modest Explorer is a van designed to get you out of the house and into nature. This beauty is equipped with solar panels, a composting toilet, a water tank and kitchenette. The idea is that you can pack up your home and escape for a weekend or even longer!", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png", type: "simple" },
@@ -12,19 +12,24 @@ const vanElements = [ {id: "1", name: "Modest Explorer", price: 60, description:
 export default function VanDetail() {
     const { id } = useParams();
     const van = vanElements.find((element) => element.id === id);
+    const location = useLocation()
+    
 
     if (!van) {
         return <div>Van not found</div>; 
     }
 
+    const search = location.state?.search || ""
+    const type = location.state?.type || "all"
+
     return (
         <div className="van-detail-container">
 
         <Link
-                to=".."
+                to={`..${search}`}
                 relative="path"
                 className="back-button"
-            >&larr; <span>Back to all vans</span></Link>
+            >&larr; <span>Back to {type} vans</span></Link>
 
         <div className="van-detail">
             <img src={van.imageUrl} alt={van.name} />
