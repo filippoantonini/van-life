@@ -15,6 +15,7 @@ import HostVanPricing from "./pages/Host/HostVanPricing"
 import HostVanPhotos from "./pages/Host/HostVanPhotos"
 import Layout from "./components/Layout.jsx"
 import HostLayout from "./components/HostLayout.jsx"
+import Login from "./pages/Login"
 
 function App() {
 
@@ -24,6 +25,10 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />}/>
           <Route path="About" element={<About />}/>
+          <Route
+      path="login"
+      element={<Login />}
+    />
           <Route path="Vans" element={<Vans />} />
           <Route path="Vans/:id" element={<VanDetail />} />
 
